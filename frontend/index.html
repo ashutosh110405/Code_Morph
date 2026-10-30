@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMorph - Code Conversion Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for crisp IDE monospace & UI typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sidebar (Layout Preserved) -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-title">
+                <span class="brand-icon">⚡</span>
+                <h2>CodeMorph</h2>
+            </div>
+            <span class="tagline">Convert • Debug • Create</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span>Converter</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>History</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-name">
+                <div class="avatar">NV</div>
+                <span>Neel J. Vidar</span>
+            </div>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Workspace (Code Conversion UI) -->
+    <main class="main-content">
+        <!-- Top Action & Title Bar -->
+        <header class="top-bar">
+            <div class="page-title-group">
+                <h1 class="page-title">Code Converter</h1>
+                <p class="page-description">Paste code on the left, choose target language, and convert instantly</p>
+            </div>
+            <div class="top-bar-actions">
+                <button id="sample-btn" class="btn btn-secondary" title="Load sample code">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    <span>Load Sample</span>
+                </button>
+                <button id="convert-btn" class="btn btn-primary" title="Convert code">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>Convert Code</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Side-by-Side Converter Workspace -->
+        <div class="converter-container">
+            <!-- Source Code Section (Left) -->
+            <section class="editor-card">
+                <div class="editor-header">
+                    <div class="header-left">
+                        <span class="label">Source:</span>
+                        <div class="select-wrapper">
+                            <select id="source-lang" class="custom-select">
+                                <option value="python" selected>Python</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="typescript">TypeScript</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                                <option value="csharp">C#</option>
+                                <option value="go">Go</option>
+                                <option value="rust">Rust</option>
+                                <option value="php">PHP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <button id="clear-btn" class="tool-btn" title="Clear Code">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            <span>Clear</span>
+                        </button>
+                        <button id="copy-source-btn" class="tool-btn" title="Copy Source Code">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <span>Copy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="code-box-container">
+                    <div class="line-gutter" id="source-gutter">1</div>
+                    <textarea id="source-code" class="code-textarea" placeholder="// Paste or write your source code here..." spellcheck="false"></textarea>
+                </div>
+
+                <div class="editor-footer">
+                    <span id="source-stats" class="stats-text">Lines: 1 | Characters: 0</span>
+                    <span class="status-pill status-input">Source Ready</span>
+                </div>
+            </section>
+
+            <!-- Middle Quick Actions (Swap & Convert) -->
+            <div class="middle-controls">
+                <button id="swap-btn" class="swap-action-btn" title="Swap Source & Target Languages">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4"/></svg>
+                </button>
+                <button id="morph-btn" class="morph-pulse-btn" title="Convert Now">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+                </button>
+            </div>
+
+            <!-- Target Converted Code Section (Right) -->
+            <section class="editor-card">
+                <div class="editor-header">
+                    <div class="header-left">
+                        <span class="label">Target:</span>
+                        <div class="select-wrapper">
+                            <select id="target-lang" class="custom-select">
+                                <option value="javascript" selected>JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="typescript">TypeScript</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                                <option value="csharp">C#</option>
+                                <option value="go">Go</option>
+                                <option value="rust">Rust</option>
+                                <option value="php">PHP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <button id="download-btn" class="tool-btn" title="Download Converted File">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span>Download</span>
+                        </button>
+                        <button id="copy-target-btn" class="tool-btn" title="Copy Converted Code">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <span>Copy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="code-box-container">
+                    <div class="line-gutter" id="target-gutter">1</div>
+                    <textarea id="target-code" class="code-textarea" placeholder="// Converted code will appear here..." readonly spellcheck="false"></textarea>
+                    
+                    <!-- Loading State Spinner -->
+                    <div id="loading-overlay" class="loading-overlay hidden">
+                        <div class="spinner"></div>
+                        <span>Converting code...</span>
+                    </div>
+                </div>
+
+                <div class="editor-footer">
+                    <span id="target-stats" class="stats-text">Lines: 0 | Characters: 0</span>
+                    <span id="conversion-status" class="status-pill status-ready">Waiting for Input</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Interactive Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

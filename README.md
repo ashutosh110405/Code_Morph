@@ -29,6 +29,29 @@ From converting code between programming languages to finding errors and generat
 
 ---
 
+## 📁 Project Structure
+
+```text
+Code_Morph/
+├── DOCUMENTS/            # Project documentation and specifications (untouched)
+│   └── CODE MORPH SYNOPSIS.pdf
+├── frontend/             # All front-end assets and UI code
+│   ├── index.html        # Main conversion workspace & dashboard layout
+│   ├── style.css         # Dark IDE styling & theme
+│   ├── script.js         # Interactive conversion & line numbering logic
+│   └── README.md
+└── backend/              # Server API, controllers, and SQL database
+    ├── config/           # Database configuration
+    ├── controllers/      # Conversion & history business logic
+    ├── routes/           # REST API routes (/api/convert, /api/history, /api/languages)
+    ├── sql/              # Database schema (schema.sql)
+    ├── server.js         # Express entry point
+    ├── package.json      # Dependencies and scripts
+    └── README.md
+```
+
+---
+
 ## 🎯 Why Code_Morph?
 
 ```text
@@ -41,3 +64,4 @@ Write → Search → Debug → Fix → Convert → Repeat
           CODE_MORPH
               ↓
      Convert • Debug • Create
+```
