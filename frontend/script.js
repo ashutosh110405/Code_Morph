@@ -1,7 +1,10 @@
-// CodeMorph - Code Conversion Platform Frontend Script
+// ========================================================
+// CodeMorph - Frontend Converter Script
+// Pure Light Theme • Live Line Numbering • Conversion Engine
+// ========================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
+    // DOM Elements - Converter
     const sourceCode = document.getElementById('source-code');
     const targetCode = document.getElementById('target-code');
     const sourceGutter = document.getElementById('source-gutter');
@@ -21,6 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const conversionStatus = document.getElementById('conversion-status');
     const loadingOverlay = document.getElementById('loading-overlay');
     const toast = document.getElementById('toast');
+
+    // Sidebar & Navigation feedback
+    const navDashboard = document.getElementById('nav-dashboard');
+    const navHistory = document.getElementById('nav-history');
+
+    if (navDashboard) {
+        navDashboard.addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('Dashboard analytics coming soon with backend integration!', 'info');
+        });
+    }
+
+    if (navHistory) {
+        navHistory.addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast('Conversion history is active for your account.', 'info');
+        });
+    }
+
+    // Load user info from localStorage if available
+    const savedUser = JSON.parse(localStorage.getItem('codemorph_user') || 'null');
+    if (savedUser) {
+        const sidebarName = document.getElementById('sidebar-name');
+        const sidebarEmail = document.getElementById('sidebar-email');
+        const sidebarAvatar = document.getElementById('sidebar-avatar');
+        if (sidebarName) sidebarName.textContent = savedUser.name;
+        if (sidebarEmail) sidebarEmail.textContent = savedUser.email;
+        if (sidebarAvatar) sidebarAvatar.textContent = savedUser.initials;
+    }
 
     // Sample code templates for different languages
     const sampleCodes = {
@@ -223,7 +255,7 @@ func filterEvenNumbers(numbers []int) []int {
             evens = append(evens, num)
         }
     }
-    return evens
+    return evens;
 }
 
 func main() {
@@ -288,7 +320,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
 ?>`
     };
 
-    // File extensions mapping for download
     const fileExtensions = {
         python: 'py',
         javascript: 'js',
@@ -301,7 +332,7 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         php: 'php'
     };
 
-    // Helper: update line numbers gutter
+    // Helper: Update line numbers in the gutter
     function updateLineNumbers(textarea, gutter) {
         const lines = textarea.value.split('\n').length;
         let lineNumbersHTML = '';
@@ -311,27 +342,24 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         gutter.innerHTML = lineNumbersHTML;
     }
 
-    // Helper: update editor statistics
-    function updateStats(textarea, statsElement, labelPrefix = '') {
+    function updateStats(textarea, statsElement) {
         const text = textarea.value;
         const lineCount = text ? text.split('\n').length : 0;
         const charCount = text.length;
         statsElement.textContent = `Lines: ${lineCount} | Characters: ${charCount}`;
     }
 
-    // Sync scroll between textarea and line numbers gutter
     function syncScroll(textarea, gutter) {
         gutter.scrollTop = textarea.scrollTop;
     }
 
-    // Tab key support in textareas
     function enableTabIndent(textarea) {
         textarea.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
                 e.preventDefault();
                 const start = textarea.selectionStart;
                 const end = textarea.selectionEnd;
-                const tabSpaces = '    '; // 4 spaces indent
+                const tabSpaces = '    ';
 
                 textarea.value = textarea.value.substring(0, start) + tabSpaces + textarea.value.substring(end);
                 textarea.selectionStart = textarea.selectionEnd = start + tabSpaces.length;
@@ -342,7 +370,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         });
     }
 
-    // Show temporary toast message
     let toastTimeout;
     function showToast(message, type = 'info') {
         clearTimeout(toastTimeout);
@@ -350,10 +377,9 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         toast.className = `toast show ${type}`;
         toastTimeout = setTimeout(() => {
             toast.className = 'toast hidden';
-        }, 3000);
+        }, 3200);
     }
 
-    // Perform Front-End Code Conversion
     function convertCode() {
         const code = sourceCode.value.trim();
         const fromLang = sourceLang.value;
@@ -366,7 +392,7 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         }
 
         if (fromLang === toLang) {
-            showToast('Source and Target languages are the same! Target code updated.', 'info');
+            showToast('Source and Target languages are identical.', 'info');
             targetCode.value = code;
             updateLineNumbers(targetCode, targetGutter);
             updateStats(targetCode, targetStats);
@@ -375,7 +401,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
             return;
         }
 
-        // Show loading state
         loadingOverlay.classList.remove('hidden');
         conversionStatus.textContent = 'Converting...';
         conversionStatus.className = 'status-pill status-converting';
@@ -392,87 +417,60 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
             conversionStatus.className = 'status-pill status-converted';
             convertBtn.disabled = false;
 
-            showToast(`Successfully converted ${fromLang} to ${toLang}!`, 'success');
+            showToast(`Converted ${fromLang.toUpperCase()} to ${toLang.toUpperCase()}!`, 'success');
         }, 400);
     }
 
-    // Realistic front-end conversion / transpilation engine
     function performMockTranspilation(inputCode, from, to) {
-        // If the sample code matches standard sample, give the authentic translated sample
         if (sampleCodes[from] && inputCode.trim() === sampleCodes[from].trim()) {
             if (sampleCodes[to]) {
                 return sampleCodes[to];
             }
         }
 
-        // Smart rule-based transpilation
         const lines = inputCode.split('\n');
         const convertedLines = [];
-
-        // Header comments indicating conversion
         const dateStr = new Date().toLocaleDateString();
+
         convertedLines.push(`// ==========================================`);
         convertedLines.push(`// Converted from: ${from.toUpperCase()} to ${to.toUpperCase()}`);
         convertedLines.push(`// Generated via CodeMorph on ${dateStr}`);
         convertedLines.push(`// ==========================================`);
         convertedLines.push(``);
 
-        // Language-specific headers
         if (to === 'java') {
-            convertedLines.push(`import java.util.*;`);
-            convertedLines.push(``);
-            convertedLines.push(`public class ConvertedProgram {`);
-            convertedLines.push(`    public static void main(String[] args) {`);
+            convertedLines.push(`import java.util.*;\n`);
+            convertedLines.push(`public class ConvertedProgram {\n    public static void main(String[] args) {`);
         } else if (to === 'cpp') {
-            convertedLines.push(`#include <iostream>`);
-            convertedLines.push(`#include <vector>`);
-            convertedLines.push(`#include <string>`);
-            convertedLines.push(``);
+            convertedLines.push(`#include <iostream>\n#include <vector>\n#include <string>\n`);
             convertedLines.push(`int main() {`);
         } else if (to === 'csharp') {
-            convertedLines.push(`using System;`);
-            convertedLines.push(`using System.Collections.Generic;`);
-            convertedLines.push(``);
-            convertedLines.push(`class Program {`);
-            convertedLines.push(`    static void Main(string[] args) {`);
+            convertedLines.push(`using System;\nusing System.Collections.Generic;\n`);
+            convertedLines.push(`class Program {\n    static void Main(string[] args) {`);
         } else if (to === 'go') {
-            convertedLines.push(`package main`);
-            convertedLines.push(``);
-            convertedLines.push(`import "fmt"`);
-            convertedLines.push(``);
-            convertedLines.push(`func main() {`);
+            convertedLines.push(`package main\n\nimport "fmt"\n\nfunc main() {`);
         } else if (to === 'rust') {
             convertedLines.push(`fn main() {`);
         } else if (to === 'php') {
             convertedLines.push(`<?php`);
         }
 
-        // Line-by-line conversion
         for (let line of lines) {
             let converted = line;
 
-            // Handle comments
             if (from === 'python' && converted.trim().startsWith('#')) {
                 converted = converted.replace('#', '//');
             } else if ((to === 'python') && converted.trim().startsWith('//')) {
                 converted = converted.replace('//', '#');
             }
 
-            // Print statement conversion
             if (to === 'javascript' || to === 'typescript') {
                 converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'console.log($1)');
-                converted = converted.replace(/\bSystem\.out\.println\s*\((.*?)\)/g, 'console.log($1)');
-                converted = converted.replace(/\bConsole\.WriteLine\s*\((.*?)\)/g, 'console.log($1)');
-                converted = converted.replace(/\bfmt\.Println\s*\((.*?)\)/g, 'console.log($1)');
-                converted = converted.replace(/\becho\s+(.*?);/g, 'console.log($1);');
                 converted = converted.replace(/True\b/g, 'true');
                 converted = converted.replace(/False\b/g, 'false');
                 converted = converted.replace(/None\b/g, 'null');
             } else if (to === 'python') {
                 converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'print($1)');
-                converted = converted.replace(/\bSystem\.out\.println\s*\((.*?)\);?/g, 'print($1)');
-                converted = converted.replace(/\bConsole\.WriteLine\s*\((.*?)\);?/g, 'print($1)');
-                converted = converted.replace(/\bfmt\.Println\s*\((.*?)\)/g, 'print($1)');
                 converted = converted.replace(/\btrue\b/g, 'True');
                 converted = converted.replace(/\bfalse\b/g, 'False');
                 converted = converted.replace(/\bnull\b/g, 'None');
@@ -481,46 +479,20 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
             } else if (to === 'java') {
                 converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'System.out.println($1);');
                 converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'System.out.println($1);');
-                converted = converted.replace(/True\b/g, 'true');
-                converted = converted.replace(/False\b/g, 'false');
-                converted = converted.replace(/None\b/g, 'null');
             } else if (to === 'cpp') {
                 converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'std::cout << $1 << std::endl;');
                 converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'std::cout << $1 << std::endl;');
-            } else if (to === 'csharp') {
-                converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'Console.WriteLine($1);');
-                converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'Console.WriteLine($1);');
             } else if (to === 'go') {
                 converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'fmt.Println($1)');
-                converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'fmt.Println($1)');
-            } else if (to === 'rust') {
-                converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'println!("{}", $1);');
-                converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'println!("{:?}", $1);');
-            } else if (to === 'php') {
-                converted = converted.replace(/\bprint\s*\((.*?)\)/g, 'echo $1 . "\\n";');
-                converted = converted.replace(/\bconsole\.log\s*\((.*?)\);?/g, 'echo $1 . "\\n";');
             }
 
-            // Function declaration conversions
             if (from === 'python' && (to === 'javascript' || to === 'typescript')) {
                 const defMatch = converted.match(/^(\s*)def\s+([a-zA-Z0-9_]+)\s*\((.*?)\)\s*:/);
                 if (defMatch) {
-                    const indent = defMatch[1];
-                    const fnName = defMatch[2];
-                    const params = defMatch[3];
-                    converted = `${indent}function ${fnName}(${params}) {`;
-                }
-            } else if ((from === 'javascript' || from === 'typescript') && to === 'python') {
-                const fnMatch = converted.match(/^(\s*)function\s+([a-zA-Z0-9_]+)\s*\((.*?)\)\s*\{?/);
-                if (fnMatch) {
-                    const indent = fnMatch[1];
-                    const fnName = fnMatch[2];
-                    const params = fnMatch[3];
-                    converted = `${indent}def ${fnName}(${params}):`;
+                    converted = `${defMatch[1]}function ${defMatch[2]}(${defMatch[3]}) {`;
                 }
             }
 
-            // Indentation adjustment for languages wrapped in class/main
             if (['java', 'cpp', 'csharp', 'go', 'rust'].includes(to)) {
                 converted = '        ' + converted;
             }
@@ -528,19 +500,11 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
             convertedLines.push(converted);
         }
 
-        // Language-specific footers
-        if (to === 'java') {
-            convertedLines.push(`    }`);
-            convertedLines.push(`}`);
+        if (to === 'java' || to === 'csharp') {
+            convertedLines.push(`    }\n}`);
         } else if (to === 'cpp') {
-            convertedLines.push(`    return 0;`);
-            convertedLines.push(`}`);
-        } else if (to === 'csharp') {
-            convertedLines.push(`    }`);
-            convertedLines.push(`}`);
-        } else if (to === 'go') {
-            convertedLines.push(`}`);
-        } else if (to === 'rust') {
+            convertedLines.push(`    return 0;\n}`);
+        } else if (to === 'go' || to === 'rust') {
             convertedLines.push(`}`);
         } else if (to === 'php') {
             convertedLines.push(`?>`);
@@ -549,7 +513,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         return convertedLines.join('\n');
     }
 
-    // Load sample code for the current source language
     function loadSampleCode() {
         const lang = sourceLang.value;
         const sample = sampleCodes[lang] || sampleCodes['python'];
@@ -559,7 +522,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         showToast(`Loaded ${lang.toUpperCase()} sample code!`, 'info');
     }
 
-    // Copy to clipboard helper
     function copyText(text, successMsg) {
         if (!text.trim()) {
             showToast('Nothing to copy!', 'warning');
@@ -568,7 +530,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         navigator.clipboard.writeText(text).then(() => {
             showToast(successMsg, 'success');
         }).catch(() => {
-            // Fallback for older browsers
             const temp = document.createElement('textarea');
             temp.value = text;
             document.body.appendChild(temp);
@@ -579,7 +540,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         });
     }
 
-    // Download code file
     function downloadTargetCode() {
         const code = targetCode.value.trim();
         if (!code) {
@@ -604,7 +564,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         showToast(`Downloaded as ${filename}!`, 'success');
     }
 
-    // Swap Source and Target Languages
     function swapLanguages() {
         const currentSource = sourceLang.value;
         const currentTarget = targetLang.value;
@@ -612,7 +571,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         sourceLang.value = currentTarget;
         targetLang.value = currentSource;
 
-        // If target code exists, swap the editor contents too
         if (targetCode.value.trim()) {
             const temp = sourceCode.value;
             sourceCode.value = targetCode.value;
@@ -627,7 +585,6 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
         showToast(`Swapped: ${currentTarget.toUpperCase()} ⇄ ${currentSource.toUpperCase()}`, 'info');
     }
 
-    // Clear Source & Target
     function clearEditor() {
         sourceCode.value = '';
         targetCode.value = '';
@@ -672,11 +629,11 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
     });
 
     sourceLang.addEventListener('change', () => {
-        showToast(`Source language changed to ${sourceLang.value.toUpperCase()}`, 'info');
+        showToast(`Source language: ${sourceLang.value.toUpperCase()}`, 'info');
     });
 
     targetLang.addEventListener('change', () => {
-        showToast(`Target language changed to ${targetLang.value.toUpperCase()}`, 'info');
+        showToast(`Target language: ${targetLang.value.toUpperCase()}`, 'info');
     });
 
     // Initialize line numbers and stats
@@ -684,8 +641,5 @@ echo "Even Fibonacci Numbers: " . implode(", ", $evenFibs) . "\n";
     updateLineNumbers(targetCode, targetGutter);
     updateStats(sourceCode, sourceStats);
     updateStats(targetCode, targetStats);
-
-    // Load initial sample so the user immediately sees how it looks & works
     loadSampleCode();
 });
-

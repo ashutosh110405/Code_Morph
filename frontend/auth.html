@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up - CodeMorph</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern UI typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="auth-standalone">
+
+    <div class="auth-standalone-wrapper">
+        <!-- Back Link to Converter -->
+        <a href="index.html" class="auth-back-link" title="Return to Code Converter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Back to Code Converter</span>
+        </a>
+
+        <!-- Centered Auth Card -->
+        <div class="auth-card">
+            <!-- Brand Header -->
+            <div class="auth-card-header">
+                <div class="auth-badge-icon">⚡</div>
+                <h2 class="auth-title" id="auth-card-title">Welcome to CodeMorph</h2>
+                <p class="auth-subtitle" id="auth-card-subtitle">Sign in to sync your conversion history and custom templates</p>
+            </div>
+
+            <!-- Auth Tabs Switcher (Login vs Sign Up) -->
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab-btn active" id="tab-login-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    <span>Sign In</span>
+                </button>
+                <button type="button" class="auth-tab-btn" id="tab-signup-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    <span>Create Account</span>
+                </button>
+            </div>
+
+            <!-- Social Fast Login -->
+            <div class="social-auth-group">
+                <button type="button" class="social-btn github-btn" id="github-auth-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>Continue with GitHub</span>
+                </button>
+                <button type="button" class="social-btn google-btn" id="google-auth-btn">
+                    <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.03 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+                    <span>Continue with Google</span>
+                </button>
+            </div>
+
+            <div class="auth-divider">
+                <span>or continue with email</span>
+            </div>
+
+            <!-- FORM 1: LOGIN FORM -->
+            <form id="login-form" class="auth-form active-form" autocomplete="on">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email Address</label>
+                    <div class="input-icon-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <input type="email" id="login-email" name="email" class="form-input" placeholder="name@company.com" required value="neel.vidar@codemorph.io">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-row">
+                        <label for="login-password" class="form-label">Password</label>
+                        <a href="#" id="forgot-password-link" class="text-link">Forgot password?</a>
+                    </div>
+                    <div class="input-icon-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <input type="password" id="login-password" name="password" class="form-input" placeholder="••••••••" required value="demo123456">
+                        <button type="button" class="password-toggle-btn" data-target="login-password" title="Show/Hide Password">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-row-checkbox">
+                    <label class="custom-checkbox-label">
+                        <input type="checkbox" id="login-remember" checked>
+                        <span class="checkbox-box"></span>
+                        <span>Remember my session</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="login-submit-btn">
+                    <span>Sign In to CodeMorph</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </form>
+
+            <!-- FORM 2: SIGN UP FORM -->
+            <form id="signup-form" class="auth-form hidden-form" autocomplete="on">
+                <div class="form-group">
+                    <label for="signup-name" class="form-label">Full Name</label>
+                    <div class="input-icon-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <input type="text" id="signup-name" name="name" class="form-input" placeholder="e.g. Alex Morgan" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email" class="form-label">Email Address</label>
+                    <div class="input-icon-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <input type="email" id="signup-email" name="email" class="form-input" placeholder="alex@company.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <div class="input-icon-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <input type="password" id="signup-password" name="password" class="form-input" placeholder="Create strong password" required>
+                        <button type="button" class="password-toggle-btn" data-target="signup-password" title="Show/Hide Password">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                    <!-- Real-time Password Strength Meter -->
+                    <div class="password-meter-container">
+                        <div class="meter-bar-track">
+                            <div class="meter-bar-fill" id="pwd-strength-bar"></div>
+                        </div>
+                        <span class="meter-label" id="pwd-strength-label">Enter a password</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-confirm-password" class="form-label">Confirm Password</label>
+                    <div class="input-icon-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <input type="password" id="signup-confirm-password" name="confirmPassword" class="form-input" placeholder="Repeat password" required>
+                    </div>
+                    <span class="input-hint" id="pwd-match-hint"></span>
+                </div>
+
+                <div class="form-row-checkbox">
+                    <label class="custom-checkbox-label">
+                        <input type="checkbox" id="signup-terms" required>
+                        <span class="checkbox-box"></span>
+                        <span>I agree to the <a href="#" class="text-link">Terms of Service</a> & <a href="#" class="text-link">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="signup-submit-btn">
+                    <span>Create Free Account</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </form>
+
+            <!-- Auth Card Footer Switcher -->
+            <div class="auth-card-footer">
+                <span id="auth-switch-text">Don't have an account yet?</span>
+                <button type="button" class="link-btn" id="auth-switch-btn">Sign Up Free</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

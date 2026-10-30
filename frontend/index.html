@@ -5,50 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeMorph - Code Conversion Platform</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for crisp IDE monospace & UI typography -->
+    <!-- Google Fonts for modern UI typography & monospace code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Sidebar (Layout Preserved) -->
+    <!-- Sidebar Layout -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <div class="brand-title">
-                <span class="brand-icon">⚡</span>
-                <h2>CodeMorph</h2>
-            </div>
-            <span class="tagline">Convert • Debug • Create</span>
+            <a href="index.html" class="brand-link">
+                <div class="brand-title">
+                    <span class="brand-icon">⚡</span>
+                    <h2>CodeMorph</h2>
+                </div>
+                <span class="tagline">Convert • Debug • Create</span>
+            </a>
         </div>
         
         <nav class="sidebar-nav">
-            <a href="#" class="nav-item active">
+            <a href="index.html" class="nav-item active">
                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                 <span>Converter</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" id="nav-dashboard">
                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 <span>Dashboard</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" id="nav-history">
                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 <span>History</span>
+            </a>
+            <a href="auth.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Sign In / Sign Up</span>
+                <span class="nav-badge">Auth</span>
             </a>
         </nav>
 
         <div class="sidebar-footer">
-            <div class="user-name">
-                <div class="avatar">NV</div>
-                <span>Neel J. Vidar</span>
-            </div>
-            <button class="logout-btn">Logout</button>
+            <a href="auth.html" class="user-profile-card" title="Click to view or switch account">
+                <div class="avatar" id="sidebar-avatar">NV</div>
+                <div class="user-details">
+                    <span class="user-name" id="sidebar-name">Neel J. Vidar</span>
+                    <span class="user-email" id="sidebar-email">neel@codemorph.io</span>
+                </div>
+            </a>
+            <a href="auth.html" class="sidebar-auth-link" id="auth-action-link">Switch Account</a>
         </div>
     </aside>
 
-    <!-- Main Workspace (Code Conversion UI) -->
+    <!-- Main Workspace (Code Conversion Workspace) -->
     <main class="main-content">
-        <!-- Top Action & Title Bar -->
+        <!-- Top Action & Navigation Bar -->
         <header class="top-bar">
             <div class="page-title-group">
                 <h1 class="page-title">Code Converter</h1>
@@ -63,6 +73,10 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                     <span>Convert Code</span>
                 </button>
+                <a href="auth.html" class="btn btn-outline" title="Go to Sign In / Sign Up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    <span>Sign In / Sign Up</span>
+                </a>
             </div>
         </header>
 
