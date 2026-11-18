@@ -7,6 +7,7 @@ This folder contains all front-end assets and UI for **CodeMorph**, built with a
 ## 📁 Pages & Structure
 
 - **`index.html`**: The main Code Converter dashboard preserving the classic sidebar layout with the side-by-side code conversion workspace (Source panel, Middle action controls, Target converted panel).
+- **`profile.html`**: Basic temporary profile page showing user overview, quick stats, account info, and quick navigation.
 - **`auth.html`**: Dedicated Authentication page containing the unified **Sign In** and **Create Account** forms, social login buttons, show/hide password toggles, live password strength meter, and password match validation.
 - **`style.css`**: Pure Light Theme SaaS design system shared across both pages, featuring clean typography (`Plus Jakarta Sans` & `Fira Code`), card shadows, form inputs, and responsive breakpoints.
 - **`script.js`**: JavaScript engine powering the code converter, live line numbering, sample code loader, language swapping, clipboard copy, and file download.

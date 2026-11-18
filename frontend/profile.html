@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - CodeMorph</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern UI typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sidebar Layout (Preserved) -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="brand-link">
+                <div class="brand-title">
+                    <span class="brand-icon">⚡</span>
+                    <h2>CodeMorph</h2>
+                </div>
+                <span class="tagline">Convert • Debug • Create</span>
+            </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span>Converter</span>
+            </a>
+            <a href="#" class="nav-item" id="nav-dashboard">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" id="nav-history">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>History</span>
+            </a>
+            <a href="profile.html" class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Profile</span>
+            </a>
+            <a href="auth.html" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                <span>Sign In / Sign Up</span>
+                <span class="nav-badge">Auth</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="profile.html" class="user-profile-card">
+                <div class="avatar" id="sidebar-avatar">NV</div>
+                <div class="user-details">
+                    <span class="user-name" id="sidebar-name">Neel J. Vidar</span>
+                    <span class="user-email" id="sidebar-email">neel@codemorph.io</span>
+                </div>
+            </a>
+            <a href="auth.html" class="sidebar-auth-link" id="auth-action-link">Switch Account</a>
+        </div>
+    </aside>
+
+    <!-- Main Content Workspace -->
+    <main class="main-content">
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <div class="page-title-group">
+                <h1 class="page-title">User Profile</h1>
+                <p class="page-description">Temporary profile and basic account overview</p>
+            </div>
+            <div class="top-bar-actions">
+                <a href="index.html" class="btn btn-secondary" title="Return to Code Converter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    <span>Back to Converter</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Profile Container -->
+        <div class="profile-container">
+            <!-- Card 1: User Identity & Stats -->
+            <div class="profile-card">
+                <div class="profile-header-group">
+                    <div class="profile-avatar-large" id="profile-avatar-large">NV</div>
+                    <div class="profile-title-details">
+                        <h2 class="profile-name" id="profile-name">Neel J. Vidar</h2>
+                        <span class="profile-email" id="profile-email">neel@codemorph.io</span>
+                        <div class="profile-badges">
+                            <span class="profile-badge badge-primary">Free Tier</span>
+                            <span class="profile-badge badge-success">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basic Stats Grid -->
+                <div class="profile-stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-box-label">Conversions</span>
+                        <span class="stat-box-value">24</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box-label">Favorite Language</span>
+                        <span class="stat-box-value">Python</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box-label">Account Status</span>
+                        <span class="stat-box-value">Verified</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Basic Account Details -->
+            <div class="profile-card">
+                <h3 class="profile-section-title">Account Information</h3>
+                <div class="profile-info-list">
+                    <div class="profile-info-row">
+                        <span class="info-label">Full Name</span>
+                        <span class="info-value" id="info-name">Neel J. Vidar</span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="info-label">Email Address</span>
+                        <span class="info-value" id="info-email">neel@codemorph.io</span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="info-label">Current Plan</span>
+                        <span class="info-value">Developer Free Tier</span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="info-label">Conversion Engine</span>
+                        <span class="info-value">Client-Side Transpiler (Local Mode)</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions-row">
+                    <a href="index.html" class="btn btn-primary">Open Code Converter</a>
+                    <a href="auth.html" class="btn btn-secondary" id="signout-link">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Interactive Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hydrate profile data from localStorage if available
+            const savedUser = JSON.parse(localStorage.getItem('codemorph_user') || 'null');
+            if (savedUser) {
+                const name = savedUser.name || 'Neel J. Vidar';
+                const email = savedUser.email || 'neel@codemorph.io';
+                const initials = savedUser.initials || 'NV';
+
+                // Profile elements
+                document.getElementById('profile-name').textContent = name;
+                document.getElementById('profile-email').textContent = email;
+                document.getElementById('profile-avatar-large').textContent = initials;
+                document.getElementById('info-name').textContent = name;
+                document.getElementById('info-email').textContent = email;
+
+                // Sidebar elements
+                document.getElementById('sidebar-name').textContent = name;
+                document.getElementById('sidebar-email').textContent = email;
+                document.getElementById('sidebar-avatar').textContent = initials;
+            }
+
+            // Toast helper
+            const toast = document.getElementById('toast');
+            let toastTimeout;
+            function showToast(message, type = 'info') {
+                if (!toast) return;
+                clearTimeout(toastTimeout);
+                toast.textContent = message;
+                toast.className = `toast show ${type}`;
+                toastTimeout = setTimeout(() => {
+                    toast.className = 'toast hidden';
+                }, 3000);
+            }
+
+            // Navigation placeholders
+            const navDashboard = document.getElementById('nav-dashboard');
+            const navHistory = document.getElementById('nav-history');
+            if (navDashboard) {
+                navDashboard.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showToast('Dashboard analytics coming soon with backend integration!', 'info');
+                });
+            }
+            if (navHistory) {
+                navHistory.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showToast('Conversion history is active for your account.', 'info');
+                });
+            }
+
+            // Sign out handler
+            const signoutLink = document.getElementById('signout-link');
+            if (signoutLink) {
+                signoutLink.addEventListener('click', () => {
+                    localStorage.removeItem('codemorph_user');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
